@@ -4,13 +4,10 @@ import axios from 'axios';
 import * as yup from 'yup';
 
 const formSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Must enter a name"),
   nickname: yup
   .string()
   .required("Must enter nickname"),
-  nickname: yup
+  species: yup
   .string()
   .required("Must enter species")
 });
@@ -18,17 +15,15 @@ const formSchema = yup.object().shape({
 const PlantForm = (props) => {
 
     const [plants , setPlants] = useState({
-        name: '',
         nickname: '',
         species: '',
-        h20frequency: '',
+        h2o_frequency: '',
     });
 
     const [error, setError] = useState({
-      name: '',
       nickname: '',
       species: '',
-      h20frequency: '',
+      h2o_frequency: '',
     });
 
 
@@ -49,10 +44,9 @@ const PlantForm = (props) => {
       validate(e);
       props.addPlant(plants);
       setPlants({
-        name: '',
         nickname: '',
         species: '',
-        h20frequency: '',
+        h2o_frequency: '',
       })
     }
 
@@ -65,16 +59,7 @@ const PlantForm = (props) => {
       return ( 
     
           <form onSubmit={ handleSubmit }>
-              <label htmlFor="name">Plant Name:</label>
-              <input 
-              id="name"
-              name="name"
-              type="text"
-            placeholder="Type plant name here."
-            value={plants.name}
-            onChange={handleChange}
-              />
-              <br/>
+          
               <label htmlFor="nickname">Plant Nickname:</label>
               <input 
               id="nickname"
@@ -95,12 +80,12 @@ const PlantForm = (props) => {
             onChange={handleChange}
               />
               <br/>
-              <label htmlFor="h20frequency">
+              <label htmlFor="h2o_frequency">
              Watering Schedule
           < select
-            name="h20frequency"
-            id="h20frequency"
-            value={plants.h20frequency}
+            name="h2o_frequency"
+            id="h2o_frequency"
+            value={plants.h2o_frequency}
             onChange={handleChange}
           >
             <option value="">-Please Select One-</option>
