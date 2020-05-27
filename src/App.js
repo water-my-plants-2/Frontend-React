@@ -4,9 +4,14 @@ import './App.css';
 import Login from './Login';
 import { Route, Link } from 'react-router-dom';
 import Plants from './Plants-Page/Plants';
-import PlantForm from './Plants-Page/Plants-Form'
+import PlantsForm from './Plants-Page/Plants-Form'
 
-function App() {
+function App() 
+
+
+
+
+{
   return (
     <div className="App">
       <nav>
@@ -26,7 +31,8 @@ function App() {
       <Route exact path="/">Sign up</Route>
       <Route path="/login" component={Login}/>
       <Route path="/plants" component={Plants}/>
-      <Route path="/plants" component={PlantForm}/>
+      <Route path='/plants-form' component={PlantsForm} />
+    
     </div>
   );
 }

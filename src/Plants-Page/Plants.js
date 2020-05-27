@@ -1,28 +1,37 @@
-import React from 'react';
-import { Route ,Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PlantForm from './Plants-Form';
 
 
 function Plants (props) {
+
+    // const addPlant = newPlants => {
+        
+    //         setPlants([...plants, newPlants]);
+    //     }
+
+    
     return (
-        <div className='addplant'>   
-        <h1>THIS IS GOING TO THE THE PLANT PAGE</h1>
+        <div className='addplant'>  
+         <h1>Plants</h1>
+         {/* <PlantForm addPlant={addPlant} />
+        <Plants data={plant}/> */}
         <Link to="/plants-form">
         <button>
             ADD A PLANT
         </button>
-        <Route path="/plants" component={PlantForm}/>
+    
         </Link>
         
 
         {/* <div className='plants'>
-            {props.data.map( ( plant , id ) =>{
+            {props.data.map( ( plants , id ) =>{
                 return (
                     <div key = {id}>
-                        <h2>{plant.name}</h2>
-                        <p>{plant.nickname}</p>
-                        <p>{plant.species}</p>
-                        <p>{plant.h20frequency}</p>
+                        <h2>{plants.name}</h2>
+                        <p>{plants.nickname}</p>
+                        <p>{plants.species}</p>
+                        <p>{plants.h20frequency}</p>
                         </div>
                 )
             })}
@@ -30,6 +39,5 @@ function Plants (props) {
     </div>
     )
 }
-
 
 export default Plants;
