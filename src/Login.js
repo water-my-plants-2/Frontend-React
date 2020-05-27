@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 const formSchema = yup.object().shape({
@@ -113,8 +114,9 @@ function Login () {
 
            </label>
            <br/>
-
+           <Link to='/plants'>
            <button disabled={buttonDisabled}>Next</button>
+           </Link>
 
            </div>
     
