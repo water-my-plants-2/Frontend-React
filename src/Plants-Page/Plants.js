@@ -1,43 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState} from "react";
 import { Link } from 'react-router-dom';
-import PlantForm from './Plants-Form';
 
 
-function Plants (props) {
+const Plants = ( props ) => {
 
-    // const addPlant = newPlants => {
-        
-    //         setPlants([...plants, newPlants]);
-    //     }
+    // const [plantList, setPlantList] = useState({
+    //     name: '',
+    //           nickname: '',
+    //           species: '',
+    //           h20frequency: '',
+    //   });
+      
+    //   const addPlant = newPlant => {
+    //     setPlantList([...plantList, newPlant]);
+    //   };
 
-    
-    return (
-        <div className='addplant'>  
-         <h1>Plants</h1>
-         {/* <PlantForm addPlant={addPlant} />
-        <Plants data={plant}/> */}
-        <Link to="/plants-form">
-        <button>
-            ADD A PLANT
-        </button>
-    
-        </Link>
-        
+return ( 
+<Link to='/plant-form'>
+<button>
+    ADD PLANTS HERE
+</button>
+</Link>
+)
 
-        {/* <div className='plants'>
-            {props.data.map( ( plants , id ) =>{
-                return (
-                    <div key = {id}>
-                        <h2>{plants.name}</h2>
-                        <p>{plants.nickname}</p>
-                        <p>{plants.species}</p>
-                        <p>{plants.h20frequency}</p>
-                        </div>
-                )
-            })}
-        </div> */}
-    </div>
-    )
-}
+}  
 
 export default Plants;
+
+
+
+// {props.plantList.map ((plants , id ) => {
+//     return (
+//         <div className="addedplants" key={id}>
+//             <h1>Plant Name: {plants.name}</h1>
+//             <p>Plant Nickname: {plants.nickname}</p>
+//             <p>Plant species: {plants.species}</p>
+//             <p>Water Schedule: {plants.h20frequency}</p>
+//         </div>

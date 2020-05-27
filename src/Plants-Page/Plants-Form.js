@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import * as yup from 'yup';
 
-
+const formSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Must enter a name"),
+  nickname: yup
+  .string()
+  .required("Must enter nickname"),
+  nickname: yup
+  .string()
+  .required("Must enter species")
+});
 
 const PlantForm = (props) => {
 
@@ -12,22 +24,37 @@ const PlantForm = (props) => {
         h20frequency: '',
     });
 
+    const [error, setError] = useState({
+      name: '',
+      nickname: '',
+      species: '',
+      h20frequency: '',
+    });
 
 
-    const clearForm = () => {
-        setPlants({
-            name: '',
-            nickname: '',
-            species: '',
-            h20frequency: '',
+    const validate = e => {
+      yup
+        .reach(formSchema, e.target.value)
+        .validate(e.target.name)
+        .then(valid => {
+          setError({
+            [e.target.name]: e.target.value
+          });
         })
+        .catch(err => {});
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // props.addPlant(plants);
-        clearForm();
-      };
+    const handleSubmit = (e) =>{
+      e.preventDefault();
+      validate(e);
+      props.addPlant(plants);
+      setPlants({
+        name: '',
+        nickname: '',
+        species: '',
+        h20frequency: '',
+      })
+    }
 
       const handleChange = (event) => {
         setPlants({ ...plants, [event.target.name]: event.target.value });
