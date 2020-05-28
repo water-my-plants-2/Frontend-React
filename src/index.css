@@ -11,3 +11,50 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.nav{
+  padding: 1%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #235b2d;
+  color: white;
+  
+}
+form input{
+  background-color: #235b2d;
+  max-width: 90%;
+  margin: 1%;
+  color: white;
+}
+form{
+  background-color: ;
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  max-width: 30%;
+  margin-left: 33%;
+}
+::placeholder{
+  color:white;
+}
+form h1{
+  margin-right: 8%;
+  padding: 3%;
+}
+img{
+  height: 360px;
+  border-radius: 50%;
+  margin-bottom: 3%;
+}
+h1{
+  padding: 2%;
+}
+p{
+  font-size: larger;
+  font-weight: bolder;
+  background-color: darkslategray;
+  color: white;
+  padding: 2%;
+  width: 30%;
+  margin-left: 35%;
+  border-radius: 15px;
+}
