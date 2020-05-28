@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as yup from 'yup';
@@ -9,7 +9,8 @@ const formSchema = yup.object().shape({
   .required("Must enter nickname"),
   species: yup
   .string()
-  .required("Must enter species")
+  .required("Must enter species"),
+  h2o_frequency: yup.string(),
 });
 
 const PlantForm = (props) => {
@@ -26,32 +27,59 @@ const PlantForm = (props) => {
       h2o_frequency: '',
     });
 
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+    useEffect(() => {
+    formSchema.isValid(plants).then(valid => {
+      setButtonDisabled(!valid);
+    });
+  }, [plants]);
 
-    const validate = e => {
-      yup
-        .reach(formSchema, e.target.value)
-        .validate(e.target.name)
-        .then(valid => {
-          setError({
-            [e.target.name]: e.target.value
-          });
-        })
-        .catch(err => {});
-    };
 
-    const handleSubmit = (e) =>{
+
+  const validate = e => {
+    let value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    yup
+      .reach(formSchema, e.target.name)
+      .validate(value)
+      .then(valid => {
+        setError({
+          ...error,
+          [e.target.name]: ""
+        });
+      })
+      .catch(err => {
+        setError({
+          ...error,
+          [e.target.name]: err.errors[0]
+        });
+      });
+    
+  };
+
+
+    const handleSubmit = e => {
       e.preventDefault();
-      validate(e);
-      props.addPlant(plants);
       setPlants({
         nickname: '',
         species: '',
         h2o_frequency: '',
       })
-    }
+      console.log("form submitted!");
+      axios
+       .post(("https://reqres.in/api/users" , plants)
+       .then (response => {
+         console.log(response.data);
+       })
+       .catch (error => console.log(error)))
+      };
 
-      const handleChange = (event) => {
-        setPlants({ ...plants, [event.target.name]: event.target.value });
+      const handleChange = e => {
+        e.persist();
+        validate(e);
+        let value =
+          e.target.type === "checkbox" ? e.target.checked : e.target.value;
+        setPlants({ ...plants, [e.target.name]: value });
       };
 
 
@@ -104,7 +132,7 @@ const PlantForm = (props) => {
         </label>
 
             <Link to="/plants">
-            <button type="submit">Submit</button>
+            <button disabled={buttonDisabled}>Submit</button>
             </Link>
               </form>
 

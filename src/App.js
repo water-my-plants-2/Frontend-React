@@ -5,46 +5,24 @@ import Login from './Login';
 import { Route, Link } from 'react-router-dom';
 import Plants from './Plants-Page/Plants';
 import PlantsForm from './Plants-Page/Plants-Form'
+import Nav from './Nav';
+import { Button } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
-const [plantList, setPlantList] = useState({
-  name: '',
-        nickname: '',
-        species: '',
-        h20frequency: '',
-});
-
-const addPlant = newPlant => {
-  setPlantList([...plantList, newPlant]);
-};
-
-
-
   return (
     <div className="App">
-      <nav>
-        <h1 className="header">Plant Parenthood</h1>
-        <div classname="nav-links">
-        <Link to="/">
-          Sign Up
-          </Link>
-        <Link to="/login">
-          Login
-          </Link>
-        <Link to='/plants'>
-          Your Plants
-          </Link>
-          <Link to='/plant-form'>
-          Add Plants
-          </Link>
-        </div>
-      </nav>
+      
+
+      <Nav />
+       <Link to="/login">
+      <button>click here</button></Link>
       <Route exact path="/">Sign up</Route>
       <Route path="/login" component={Login}/>
       <Route path="/plant-form" component={PlantsForm}/>
-      <Route path='/plants' component={Plants}/>
-    
+      <Route path='/plants' component={Plants}/> 
+      
     </div>
   );
 }

@@ -119,7 +119,7 @@ function Login () {
 
            </label>
            <br/>
-           <Link to='/plants'>
+           <Link to='/plant-form'>
            <button disabled={buttonDisabled}>Next</button>
            </Link>
 
