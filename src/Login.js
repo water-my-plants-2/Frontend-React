@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 const formSchema = yup.object().shape({
-    name: yup.string().required("Please enter your username"),
+    username: yup.string().required("Please enter your username"),
     password: yup.string()
     .min(7 , "Must have more that 7 characters")
     .required("Must enter"),
@@ -14,7 +15,7 @@ const formSchema = yup.object().shape({
 function Login () {
 
     const [ login, setLogin ] = useState({
-        name:'',
+        username:'',
         password:'',
     })
 
@@ -26,8 +27,10 @@ function Login () {
   }, [login]);
 
 
+  const [post, setPost] = useState({});
+
     const [error , setError] = useState({
-        name:"",
+        username:"",
         password:"",
     });
 
@@ -66,15 +69,18 @@ function Login () {
       e.preventDefault();
       console.log("form submitted!");
       axios
-        .post("https://reqres.in/api/users", login)
-        .then(response => console.log(response))
-        .catch(err => console.log(err));
-        setLogin({
-          name:'',
-          password:'',
+        .post("https://water-my-plants2-be.herokuapp.com/api/auth/login", login)
+        .then( (response) => {
+          setPost(response.data);
+          console.log("Login", response);
         })
+        .catch((err) => console.log(err.res));
+        setLogin({
+                username:'',
+                password:'',
+              })
     };
-
+   
 
     return(
         <form onSubmit={formSubmit}>
@@ -83,17 +89,17 @@ function Login () {
                 <p>Log into your account</p>
 
              
-           <label htmlFor="name">
+           <label htmlFor="username">
                Username
-            <input
+          <input
           type="text"
-          name="name"
-          id="name"
-          value={login.name}
+          name="username"
+          id="username"
+          value={login.username}
           onChange={inputChange}
         />
-         {error.name.length > 0 ? (
-          <p className="error">{error.name}</p>
+         {error.username.length > 0 ? (
+          <p className="error">{error.username}</p>
         ) : null}
 
            </label>
@@ -113,8 +119,9 @@ function Login () {
 
            </label>
            <br/>
-
+           <Link to='/plants'>
            <button disabled={buttonDisabled}>Next</button>
+           </Link>
 
            </div>
     
