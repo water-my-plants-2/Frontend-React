@@ -1,52 +1,35 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Login from './Login';
-import { Route, Link } from 'react-router-dom';
-import Plants from './Plants-Page/Plants';
-import PlantsForm from './Plants-Page/Plants-Form'
+import React from "react";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Login from "./components/Login";
+import AddPlant from "./components/AddPlant.js";
+import PlantsList from "./components/PlantsList";
+import PrivateRoute from "./components/PrivateRoute";
+import "./App.css";
 
 function App() {
-
-const [plantList, setPlantList] = useState({
-  name: '',
-        nickname: '',
-        species: '',
-        h20frequency: '',
-});
-
-const addPlant = newPlant => {
-  setPlantList([...plantList, newPlant]);
-};
-
-
-
+  const logout = (e) => {
+    e.preventDefault();
+    localStorage.clear("token");
+    window.location.reload(false);
+  };
   return (
-    <div className="App">
-      <nav>
-        <h1 className="header">Plant Parenthood</h1>
-        <div classname="nav-links">
-        <Link to="/">
-          Sign Up
-          </Link>
-        <Link to="/login">
-          Login
-          </Link>
-        <Link to='/plants'>
-          Your Plants
-          </Link>
-          <Link to='/plant-form'>
-          Add Plants
-          </Link>
+    <section className="App"  >
+      <Router>
+        <div>
+         <Link  to="/login">Login </Link> 
+          <Link  to="/plantslist">Plants List</Link>
+          <Link  to="/addplant">Add Plant</Link>
+          <button  onClick={logout}>Log Out</button>
         </div>
-      </nav>
-      <Route exact path="/">Sign up</Route>
-      <Route path="/login" component={Login}/>
-      <Route path="/plant-form" component={PlantsForm}/>
-      <Route path='/plants' component={Plants}/>
-    
-    </div>
+
+        <Switch> 
+          <PrivateRoute exact path="/plantslist" component={PlantsList} />
+          <PrivateRoute exact path="/addplant" component={AddPlant} />
+          <Route path="/login" component={Login} />
+          <Route component={Login} />
+        </Switch>
+      </Router>
+    </section>
   );
 }
-
 export default App;
