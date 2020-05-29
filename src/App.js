@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Login from "./components/Login";
 import AddPlant from "./components/AddPlant.js";
@@ -7,6 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
 
 function App() {
+
   const logout = (e) => {
     e.preventDefault();
     localStorage.clear("token");
