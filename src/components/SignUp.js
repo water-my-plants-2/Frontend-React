@@ -7,8 +7,8 @@ function Signup(props) {
     newCreds: {
       firstName: "",
       lastName: "",
-      userName: "",
-      passWord: "",
+      username: "",
+      password: "",
       phoneNumber: "",
     },
     
@@ -64,19 +64,19 @@ function Signup(props) {
 
           <input
            type="text"
-            name="newusername"
+            name="username"
             placeholder="new-username"
             required="required"
-            value={signUp.newCreds.userName}
+            value={signUp.newCreds.username}
             onChange={(e) => handleChange(e)}
           />
 
           <input
             type="password"
-            name="newpassword"
+            name="password"
             placeholder="newp-assword"
             required="required"
-            value={signUp.newCreds.passWord}
+            value={signUp.newCreds.password}
             onChange={(e) => handleChange(e)}
           />
 

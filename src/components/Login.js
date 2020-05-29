@@ -24,7 +24,7 @@ function Login(props) {
             .then((res) => {
                 localStorage.setItem("token", res.data.token)
                 //store res.data.id into context api
-                props.history.push("/plantslist");
+                props.history.push("/protected");
             })
             .catch((err) => {
                 console.log("ERR", err);

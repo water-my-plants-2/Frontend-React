@@ -29,8 +29,8 @@ function App() {
         <Route  exact path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Switch> 
-          <PrivateRoute exact path="/plantslist" component={PlantsList} />
-          <PrivateRoute exact path="/addplant" component={AddPlant} />
+          <PrivateRoute exact path="/protected" component={PlantsList} />
+          <PrivateRoute exact path="/protected" component={AddPlant} />
           
          
            
