@@ -18,10 +18,12 @@ function Login(props) {
 
     const login = (e) => {
         e.preventDefault();
+        
         axiosWithAuth()
             .post("/api/auth/login", cred.credentials)
             .then((res) => {
-                localStorage.setItem("token", res.data.payload);
+                localStorage.setItem("token", res.data.token)
+                //store res.data.id into context api
                 props.history.push("/plantslist");
             })
             .catch((err) => {
@@ -32,7 +34,7 @@ function Login(props) {
     return (
 
         <div>
-
+        {console.log(cred.credentials)}
             <h1>Login</h1>
             <form onSubmit={(e) => login(e)}>
                 <p>
@@ -40,6 +42,7 @@ function Login(props) {
                         type="text"
                         name="username"
                         placeholder="UserName"
+                        required="required"
                         value={cred.credentials.username}
                         onChange={handleChange}
                     />
@@ -49,6 +52,7 @@ function Login(props) {
                         type="password"
                         name="password"
                         placeholder="Password"
+                        required="required"
                         value={cred.credentials.password}
                         onChange={(e) => handleChange(e)}
                     />

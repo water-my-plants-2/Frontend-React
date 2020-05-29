@@ -18,9 +18,9 @@ function PlantsList() {
         .catch((err) => console.log("ERROR", err))
     }, [])
 
-    const deleteHandler = (e, id) => {
+    const deleteHandler = (id) => {
         axiosWithAuth()
-        .delete("/api/:id/plants/:plantId")
+        .delete(`/api/${id}/plants/${id}`)
         .then((res => setPlants(res.data)))
         .catch((err) => console.log("ERROR", err))
     }
@@ -33,7 +33,7 @@ function PlantsList() {
                         <h3>Name: {x.nickname}</h3>
                         <h3>Species: {x.species}</h3>
                         <h3>h2o_frequency: {x.h2o_frequency}</h3>
-                        <button onClick={(e)=> deleteHandler(e, x.id)}> 
+                        <button onClick={()=> deleteHandler(x.id)}> 
                             Remove Plant</button>
                     </div>
                 )
