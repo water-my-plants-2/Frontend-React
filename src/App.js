@@ -6,7 +6,6 @@ import { Route, Link } from 'react-router-dom';
 import Plants from './Plants-Page/Plants';
 import PlantsForm from './Plants-Page/Plants-Form'
 import Nav from './Nav';
-import { Button } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -16,9 +15,12 @@ function App() {
       
 
       <Nav />
-       <Link to="/login">
-      <button>click here</button></Link>
-      <Route exact path="/">Sign up</Route>
+       {/* <Link to="/login">
+      <button>click here</button></Link> */}
+      <Route exact path="/">Home</Route>
+      <Route exact path="/about">About</Route>
+      <Route exact path="/register">Register</Route>
+      <Route exact path="/profile">Profile</Route>
       <Route path="/login" component={Login}/>
       <Route path="/plant-form" component={PlantsForm}/>
       <Route path='/plants' component={Plants}/> 

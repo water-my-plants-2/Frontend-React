@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
+
 const formSchema = yup.object().shape({
     username: yup.string().required("Please enter your username"),
     password: yup.string()
@@ -27,14 +28,15 @@ function Login () {
   }, [login]);
 
 
-  const [post, setPost] = useState({});
+  const [setPost] = useState({});
 
     const [error , setError] = useState({
         username:"",
         password:"",
     });
 
-    const validate = e => {
+     //validating my schema 
+     const validate = e => {
       let value =
         e.target.type === "checkbox" ? e.target.checked : e.target.value;
       yup
@@ -52,7 +54,6 @@ function Login () {
             [e.target.name]: err.errors[0]
           });
         });
-      
     };
 
       
@@ -64,29 +65,25 @@ function Login () {
       setLogin({ ...login, [e.target.name]: value });
     };
 
-
+    //submit my form
     const formSubmit = e => {
       e.preventDefault();
-      console.log("form submitted!");
+      console.log("Logging in!");
       axios
         .post("https://water-my-plants2-be.herokuapp.com/api/auth/login", login)
-        .then( (response) => {
-          setPost(response.data);
-          console.log("Login", response);
-        })
-        .catch((err) => console.log(err.res));
-        setLogin({
-                username:'',
-                password:'',
-              })
+        .then((res) => {
+          setPost(res.data);
+          console.log("Logging in", res)
+      })
+        .catch(err => console.log(err));
     };
    
 
     return(
-        <form onSubmit={formSubmit}>
-           <div className='login'>
-                <h2>Welcome Back!</h2>
-                <p>Log into your account</p>
+
+      <form onSubmit={formSubmit}>
+                <h3>Welcome Back!</h3>
+                <h4>Log into your account</h4>
 
              
            <label htmlFor="username">
@@ -119,15 +116,20 @@ function Login () {
 
            </label>
            <br/>
-           <Link to='/plant-form'>
-           <button disabled={buttonDisabled}>Next</button>
-           </Link>
+          
+                    
+           {/* <Link to='/profile'> */}
+        <button disabled={buttonDisabled}>
+           Login
+           </button> 
+         {/* </Link> */}
 
-           </div>
-    
+      
            <pre>{JSON.stringify(Login, null, 2)}</pre>
         </form>
     );
 }
 
 export default Login;
+
+ 

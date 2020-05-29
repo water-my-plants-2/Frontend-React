@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as yup from 'yup';
+
 
 const formSchema = yup.object().shape({
   nickname: yup
@@ -13,7 +13,7 @@ const formSchema = yup.object().shape({
   h2o_frequency: yup.string(),
 });
 
-const PlantForm = (props) => {
+const PlantForm = () => {
 
     const [plants , setPlants] = useState({
         nickname: '',
@@ -57,22 +57,34 @@ const PlantForm = (props) => {
     
   };
 
-
-    const handleSubmit = e => {
-      e.preventDefault();
-      setPlants({
-        nickname: '',
-        species: '',
-        h2o_frequency: '',
-      })
-      console.log("form submitted!");
-      axios
-       .post(("https://reqres.in/api/users" , plants)
-       .then (response => {
-         console.log(response.data);
+  const handleSubmit = e => {
+    e.preventDefault();
+    setPlants({
+          nickname: '',
+          species: '',
+          h2o_frequency: '',
        })
-       .catch (error => console.log(error)))
-      };
+    console.log("Adding Plants!");
+    axios
+      .post("https://water-my-plants2-be.herokuapp.com/api/:id/plants", plants)
+      .then(response => console.log(response))
+      .catch(err => console.log(err));
+  };
+    // const handleSubmit = e => {
+    //   e.preventDefault();
+    //   setPlants({
+    //     nickname: '',
+    //     species: '',
+    //     h2o_frequency: '',
+    //   })
+    //   console.log("form submitted!");
+    //   axios
+    //    .post(("https://reqres.in/api/users" , plants)
+    //    .then (response => {
+    //      console.log(response.data);
+    //    })
+    //    .catch (error => console.log(error)))
+    //   };
 
       const handleChange = e => {
         e.persist();
@@ -85,9 +97,9 @@ const PlantForm = (props) => {
 
 
       return ( 
-    
+        
           <form onSubmit={ handleSubmit }>
-          
+
               <label htmlFor="nickname">Plant Nickname:</label>
               <input 
               id="nickname"
@@ -97,7 +109,12 @@ const PlantForm = (props) => {
             value={plants.nickname}
             onChange={handleChange}
               />
+              {error.nickname.length > 0 ? (
+          <p className="error">{error.nickname}</p>
+        ) : null}
+             
               <br/>
+             
               <label htmlFor="species">Species:</label>
               <input 
               id="species"
@@ -106,8 +123,16 @@ const PlantForm = (props) => {
             placeholder="Type species here."
             value={plants.species}
             onChange={handleChange}
+            
               />
+           {error.species.length > 0 ? (
+          <p className="error">{error.species}</p>
+        ) : null}
+             
+
+             
               <br/>
+             
               <label htmlFor="h2o_frequency">
              Watering Schedule
           < select
@@ -128,15 +153,17 @@ const PlantForm = (props) => {
             <option value="Every six days">Every six days</option>
             <option value="Once a week">Once a week</option>
             <option value="Once every two weeks">Once every two weeks</option>
+            <option value="Once every two weeks">Once a month</option>
           </select>
         </label>
+       <br/>
 
-            <Link to="/plants">
+            
             <button disabled={buttonDisabled}>Submit</button>
-            </Link>
+      
               </form>
 
-        
+
 
       )
 }
