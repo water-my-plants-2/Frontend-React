@@ -1,13 +1,13 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import Axios from 'axios'
+import axios from 'axios'
 
 
 export default function FormReg2(){
     const{register, handleSubmit, errors} = useForm()
     const onSubmit = (data) => {
         console.log(data)
-        Axios
+        axios
         .post('https://water-my-plants2-be.herokuapp.com/api/auth/register', register)
         .then((response) => {
             handleSubmit(response.data)
@@ -17,10 +17,10 @@ export default function FormReg2(){
             console.log(error);
             register({
                 username:'',
-                number:'',
+                phonenumber:'',
                 password:''
             })
-    });
+        })
     }
 
     return(
