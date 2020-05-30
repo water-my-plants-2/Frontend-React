@@ -28,19 +28,19 @@ const UpdatePlant = (props) => {
     });
   };
 
-  const handleSubmit = (e,id) => {
-    e.preventDefault();
-    axiosWithAuth()
-      .put(`/api/plants/${update.id}`, update)
-      .then((res) => {
-        props.history.push(`plants/${update.id}`);
-      })
-      .catch((err) => console.log(err));
-  };
+  //const handleSubmit = (e,id) => {
+    //e.preventDefault();
+    //axiosWithAuth()
+      //.put(`/api/plants/${update.id}`, update)
+      //.then((res) => {
+        //props.history.push(`plants/${update.id}`);
+      //})
+      //.catch((err) => console.log(err));
+  //};
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <input
           type="text"
           name="nickname"
