@@ -1,66 +1,74 @@
-import React, { useState} from "react"
-import axiosWithAuth from "../util/axiosWithAuth"
+import React, { useState, useEffect } from "react";
+import axiosWithAuth from "../util/axiosWithAuth";
 
 const initialPlant = {
-    id: "",
-    nickname: "",
-    Species: "",
-    h2o_frequency: ""
-}
+  id: "",
+  nickname: "",
+  species: "",
+  h2o_frequency: "",
+};
 
-const UpdatePlant = props => {
-    const [update, setUpdate] = useState(initialPlant)
+const UpdatePlant = (props) => {
+  const [update, setUpdate] = useState(initialPlant);
 
-    const changeHandler = e => {
-        setUpdate({
-            ...update,
-            [e.target.name]: e.target.value
-        })
-    }
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/api/plants")
+      .then((res) => {
+        console.log(res);
+        setUpdate(res.data);
+      })
+      .catch((err) => console.log("ERROR", err));
+  }, []);
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        axiosWithAuth()
-            .put(`/api/:id/plants/${update.id}`, update)
-            .then(res => {
-                props.history.push(`plants/${update.id}`);
-            })
-            .catch(err => console.log(err))
-    }
+  const changeHandler = (e) => {
+    setUpdate({
+      ...update,
+      [e.target.name]: e.target.value,
+    });
+  };
 
+  const handleSubmit = (e,id) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .put(`/api/plants/${update.id}`, update)
+      .then((res) => {
+        props.history.push(`plants/${update.id}`);
+      })
+      .catch((err) => console.log(err));
+  };
 
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="nickname"
+          onChange={changeHandler}
+          placeholder="nickname"
+          value={update.nickname}
+        />
 
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    name="nickname"
-                    onChange={changeHandler}
-                    placeholder='nickname'
-                    value={update.nickname}
-                />
+        <input
+          type="text"
+          name="Species"
+          onChange={changeHandler}
+          placeholder="Species"
+          value={update.species}
+        />
 
-                <input
-                    type='text'
-                    name='Species'
-                    onChange={changeHandler}
-                    placeholder='Species'
-                    value={update.Species}
-                />
+        <input
+          type="text"
+          name="h2o_frequency"
+          onChange={changeHandler}
+          placeholder="h2o_frequency"
+          value={update.h2o_frequency}
+        />
 
-                <input
-                    type='text'
-                    name='h2o_frequency'
-                    onChange={changeHandler}
-                    placeholder='h2o_frequency'
-                    value={update.h2o_frequency}
-                />
-
-                <button> Update </button>
-            </form>
-        </div>
-    )
-}
+        <button> Update </button>
+      </form>
+    </div>
+  );
+};
 
 export default UpdatePlant;

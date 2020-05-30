@@ -3,10 +3,10 @@ import axiosWithAuth from "../util/axiosWithAuth"
 
 
 
-function AddPlant() {
+function AddPlant({plants}) {
     const [plant, setPlant] = useState({
         nickname: "",
-        Species: "",
+        species: "",
         h2o_frequency: ""
     })
 
@@ -17,18 +17,20 @@ function AddPlant() {
         });
     };
 
-    const addNewPlant = (e) => {
+    const addNewPlant = (e,id) => {
         e.preventDefault()
         axiosWithAuth()
-            .post("/api/:id/plants", plant)
-            .then((res) => console.log(res))
+            .post("/api/plants", plant)
+            .then((res) => console.log(res)
+            
+            )
             .catch((err) => console.log("ERR", err));
     }
 
     return (
         <form onSubmit={addNewPlant}>
 
-            <label htmlFor="nickname">Plant Nickname:</label>
+            <label>Plant Nickname:</label>
             <input
                 id="nickname"
                 name="nickname"
@@ -38,7 +40,7 @@ function AddPlant() {
                 onChange={handleChange}
             />
             <br />
-            <label htmlFor="species">Species:</label>
+            <label>Species:</label>
             <input
                 id="species"
                 name="species"
@@ -72,7 +74,7 @@ function AddPlant() {
             </label>
 
 
-            <button type="submit">Add Plant</button>
+            <button type="submit" onClick={addNewPlant}>Add Plant</button>
 
         </form>
     )
