@@ -21,17 +21,18 @@ function App() {
         <div>
           <Link to="/login">Login </Link>
           <Link to="/signup">SignUp </Link>
-          
+
           <button onClick={logout}>Log Out</button>
         </div>
 
         <Route exact path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/plantlist" component={PlantsList} />
 
         <PrivateRoute exact path="/protected" component={PlantsList} />
         <PrivateRoute exact path="/protected" component={AddPlant} />
-        
-        <PrivateRoute exact path="/protected" component={UpdatePlant} />
+
+        <PrivateRoute exact path="/plants/:id" component={UpdatePlant} />
       </Router>
     </section>
   );

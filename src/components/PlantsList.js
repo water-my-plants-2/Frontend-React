@@ -3,7 +3,7 @@ import axiosWithAuth from "../util/axiosWithAuth";
 
 function PlantsList(props) {
   const [plants, setPlants] = useState([]);
-
+  //const { id } = props.match.params;
   console.log(plants);
 
   useEffect(() => {
@@ -27,12 +27,7 @@ function PlantsList(props) {
   };
 
   const editHandler = (id) => {
-    axiosWithAuth()
-      .put(`/api/plants/${id}`, plants)
-      .then((res) => {
-        props.history.push(`plants/${id}`);
-      })
-      .catch((err) => console.log(err));
+    props.history.push(`plants/${id}`);
   };
 
   return (

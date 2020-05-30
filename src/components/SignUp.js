@@ -1,9 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axiosWithAuth from "../util/axiosWithAuth";
 
 function Signup(props) {
   const [signUp, setSignUp] = useState({
-    
     newCreds: {
       firstName: "",
       lastName: "",
@@ -11,7 +10,6 @@ function Signup(props) {
       password: "",
       phoneNumber: "",
     },
-    
   });
 
   const handleChange = (e) => {
@@ -63,7 +61,7 @@ function Signup(props) {
           />
 
           <input
-           type="text"
+            type="text"
             name="username"
             placeholder="new-username"
             required="required"

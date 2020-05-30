@@ -1,46 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+ 
 import axiosWithAuth from "../util/axiosWithAuth";
-
 const initialPlant = {
-  id: "",
   nickname: "",
   species: "",
   h2o_frequency: "",
 };
-
 const UpdatePlant = (props) => {
+  const { id } = props.match.params;
   const [update, setUpdate] = useState(initialPlant);
-
-  useEffect(() => {
-    axiosWithAuth()
-      .get("/api/plants")
-      .then((res) => {
-        console.log(res);
-        setUpdate(res.data);
-      })
-      .catch((err) => console.log("ERROR", err));
-  }, []);
-
   const changeHandler = (e) => {
     setUpdate({
       ...update,
       [e.target.name]: e.target.value,
     });
   };
-
-  //const handleSubmit = (e,id) => {
-    //e.preventDefault();
-    //axiosWithAuth()
-      //.put(`/api/plants/${update.id}`, update)
-      //.then((res) => {
-        //props.history.push(`plants/${update.id}`);
-      //})
-      //.catch((err) => console.log(err));
-  //};
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(id);
+    axiosWithAuth()
+      .put(`/api/plants/${id}`, update)
+      .then((res) => {
+        props.history.push(`/protected`);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="nickname"
@@ -48,15 +35,13 @@ const UpdatePlant = (props) => {
           placeholder="nickname"
           value={update.nickname}
         />
-
         <input
           type="text"
-          name="Species"
+          name="species"
           onChange={changeHandler}
           placeholder="Species"
-          value={update.species}
+          value={update.Species}
         />
-
         <input
           type="text"
           name="h2o_frequency"
@@ -64,11 +49,9 @@ const UpdatePlant = (props) => {
           placeholder="h2o_frequency"
           value={update.h2o_frequency}
         />
-
         <button> Update </button>
       </form>
     </div>
   );
 };
-
 export default UpdatePlant;
