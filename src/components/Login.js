@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../util/axiosWithAuth";
+import "./Login.css";
 
 function Login(props) {
   const [cred, setCred] = useState({
@@ -31,10 +32,13 @@ function Login(props) {
   };
 
   return (
-    <div>
+    <div class="login">
       {console.log(cred.credentials)}
+      <h6>Water My Plant</h6>
       <h1>Login</h1>
-      <form onSubmit={(e) => login(e)}>
+      <form  method="post" onSubmit={(e) => login(e)}>
+        
+
         <p>
           <input
             type="text"
@@ -45,7 +49,9 @@ function Login(props) {
             onChange={handleChange}
           />
         </p>
+
         <p>
+           
           <input
             type="password"
             name="password"
@@ -57,7 +63,9 @@ function Login(props) {
         </p>
 
         <p>
-          <input type="submit" value="Log in" />
+          <button class="btn btn-primary btn-block btn-large" type="submit" value="Log in">
+            Log in
+          </button>
         </p>
       </form>
     </div>

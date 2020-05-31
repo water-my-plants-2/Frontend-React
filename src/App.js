@@ -4,7 +4,6 @@ import Login from "./components/Login";
 import AddPlant from "./components/AddPlant.js";
 import PlantsList from "./components/PlantsList";
 import SignUp from "./components/SignUp";
-//import Plants from "./components/Plants"
 import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
 import UpdatePlant from "./components/UpdatePlant";
@@ -19,18 +18,25 @@ function App() {
     <section className="App">
       <Router>
         <div>
-          <Link to="/login">Login </Link>
-          <Link to="/signup">SignUp </Link>
+          <Link className="sign" to="/login">
+            Login{" "}
+          </Link>
+          <Link className="sign" to="/signup">
+            SignUp{" "}
+          </Link>
 
-          <button onClick={logout}>Log Out</button>
+          <button className="sign" onClick={logout}>
+            Log Out
+          </button>
         </div>
 
         <Route exact path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/plantlist" component={PlantsList} />
-
-        <PrivateRoute exact path="/protected" component={PlantsList} />
+        {/* <div className="align1"><h5>Add Plant</h5></div> */}
         <PrivateRoute exact path="/protected" component={AddPlant} />
+        {/*<div className="align"><h5>Plants List</h5></div>*/}
+        <PrivateRoute exact path="/protected" component={PlantsList} />
 
         <PrivateRoute exact path="/plants/:id" component={UpdatePlant} />
       </Router>

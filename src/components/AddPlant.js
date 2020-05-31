@@ -26,7 +26,8 @@ function AddPlant({ plants }) {
   };
 
   return (
-    <form onSubmit={addNewPlant}>
+    <form  onSubmit={addNewPlant}>
+    
       <label>Plant Nickname:</label>
       <input
         id="nickname"
@@ -48,7 +49,7 @@ function AddPlant({ plants }) {
       />
       <br />
       <label htmlFor="h2o_frequency">
-        Watering Schedule
+      <h7 className="sch"> Watering Schedule </h7>
         <select
           name="h2o_frequency"
           id="h2o_frequency"

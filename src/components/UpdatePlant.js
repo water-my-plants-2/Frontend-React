@@ -1,5 +1,7 @@
 import React, { useState } from "react";
- 
+import "./Login.css";
+
+
 import axiosWithAuth from "../util/axiosWithAuth";
 const initialPlant = {
   nickname: "",
@@ -26,8 +28,9 @@ const UpdatePlant = (props) => {
       .catch((err) => console.log(err));
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div class="login">
+      <h1> Update Plant</h1>
+      <form method="post" onSubmit={handleSubmit}>
         <input
           type="text"
           name="nickname"
@@ -42,14 +45,29 @@ const UpdatePlant = (props) => {
           placeholder="Species"
           value={update.Species}
         />
-        <input
-          type="text"
-          name="h2o_frequency"
-          onChange={changeHandler}
-          placeholder="h2o_frequency"
-          value={update.h2o_frequency}
-        />
-        <button> Update </button>
+        <label htmlFor="h2o_frequency">
+         <h7 className="sch"> Watering Schedule </h7>
+          <select
+            name="h2o_frequency"
+            id="h2o_frequency"
+            value={update.h2o_frequency}
+            onChange={changeHandler}
+          >
+            <option value="">-Please Select One-</option>
+            <option value="Once a day">Once a day</option>
+            <option value="Twice a day">Twice a day</option>
+            <option value="Three times a day">Three times a day</option>
+            <option value="Every other day">Every other day</option>
+            <option value="Every two days">Every two days</option>
+            <option value="Every three days">Every three days</option>
+            <option value="Every four days">Every four days</option>
+            <option value="Every five days">Every five days</option>
+            <option value="Every six days">Every six days</option>
+            <option value="Once a week">Once a week</option>
+            <option value="Once every two weeks">Once every two weeks</option>
+          </select>
+        </label>
+        <button class="btn btn-primary btn-block btn-large"> Update </button>
       </form>
     </div>
   );
