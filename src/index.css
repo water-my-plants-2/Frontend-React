@@ -26,7 +26,6 @@ form input{
   color: white;
 }
 form{
-  background-color: ;
   display: flex;
   flex-direction: column;
   padding: 5%;
@@ -57,4 +56,35 @@ p{
   width: 30%;
   margin-left: 35%;
   border-radius: 15px;
+}
+.dark-mode__toggle {
+  background: papayawhip;
+  border-radius: 50px;
+  border: 1px solid black;
+  padding: 20%;
+}
+
+.toggle {
+  background: #f68819;
+  border-radius: 50px;
+  height: 18px;
+  left: 0;
+  position: absolute;
+  transition: 0.2s;
+  width: 20px;
+}
+
+.toggled {
+  left: 18px;
+}
+.dark-mode {
+  color: #313843;
+  background-color: #313843;
+}
+.dark-mode .nav {
+  background-color: #1F2022;
+  border: none;
+}
+.dark-mode h1{
+  color: dodgerblue;
 }

@@ -25,6 +25,7 @@ export default function FormReg2(){
 
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='dark-mode__toggle'>
             <h1>Please Register</h1>
 
             <input type='text' placeholder='Username' name='username' ref={register({required: true, minLength:4})}/>
@@ -34,6 +35,7 @@ export default function FormReg2(){
             {errors.number && <p>Number must be 5 characters</p>}
             {errors.password && <p>Password must be 5 characters</p>}
             <input id='submit' type='submit'/>
+            </div>
         </form>
     )
 }
