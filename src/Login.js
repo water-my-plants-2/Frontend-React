@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import './index.css'
+// import { Link } from 'react-router-dom';
 
 
 
@@ -66,63 +67,77 @@ function Login () {
     };
 
     //submit my form
+    // const formSubmit = e => {
+    //   e.preventDefault();
+    //   console.log("Logging in!");
+    //   axios
+    //     .post("https://water-my-plants2-be.herokuapp.com/api/auth/login", login)
+    //     .then((res) => {
+    //       setPost(res.data);
+    //       console.log("Logging in", res)
+    //   })
+    //     .catch(err => console.log(err));
+    //     setLogin({
+    //       username:'',
+    //       password:'',
+    //     })
+    // };
+
     const formSubmit = e => {
       e.preventDefault();
       console.log("Logging in!");
       axios
         .post("https://water-my-plants2-be.herokuapp.com/api/auth/login", login)
-        .then((res) => {
-          setPost(res.data);
-          console.log("Logging in", res)
-      })
+        .then(response => console.log(response))
         .catch(err => console.log(err));
+        setLogin({
+          username:'',
+          password:'',
+        })
     };
    
 
     return(
 
       <form onSubmit={formSubmit}>
-                <h3>Welcome Back!</h3>
-                <h4>Log into your account</h4>
-
-             
-           <label htmlFor="username">
-               Username
+               <h2>Please Login</h2>
+               <br/>
           <input
           type="text"
           name="username"
           id="username"
+          placeholder="username"
           value={login.username}
           onChange={inputChange}
         />
          {error.username.length > 0 ? (
-          <p className="error">{error.username}</p>
+          <p>{error.username}</p>
         ) : null}
 
-           </label>
+
            <br/>
-           <label htmlFor="password">
-               Password 
+          
             <input
           type="password"
           name="password"
           id="password"
+          placeholder="password"
           value={login.password}
           onChange={inputChange}
         />
          {error.password.length > 7 ? (
-          <p className="error">{error.password}</p>
+          <p>{error.password}</p>
         ) : null}
 
-           </label>
+      
            <br/>
           
                     
-           {/* <Link to='/profile'> */}
+          
         <button disabled={buttonDisabled}>
            Login
            </button> 
-         {/* </Link> */}
+        
 
       
            <pre>{JSON.stringify(Login, null, 2)}</pre>
